@@ -20,4 +20,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-app/config/db.config.js
+
+nodemon.json
