@@ -50,7 +50,7 @@ db.ROLES = ["user", "admin", "moderator"];
 db.list      = require("../models/checklist/list.model.js")(sequelize, Sequelize);
 db.entry     = require("../models/checklist/entry.model.js")(sequelize, Sequelize);
 
-db.list.hasMany(db.entry, { as: "entries" });
+db.list.hasMany(db.entry, { as: "entries", onDelete: 'cascade', hooks:true });
 db.entry.belongsTo(db.list, { as: "list" });
 
 // @todo: What about primary key?

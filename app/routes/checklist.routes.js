@@ -17,6 +17,18 @@ module.exports = function (app) {
     app.post("/api/checklists/entry",
         checklist.createEntry);
 
+    // Create a new entry
+    app.post("/api/checklists/entry",
+        checklist.createEntry);
+
+    // Delete an entry
+    app.delete("/api/checklists/entry/:id",
+        checklist.deleteEntry);
+
+    // Delete a list
+    app.delete("/api/checklists/list/:id",
+        checklist.deleteList);
+
     // Retrieve all lists including entries
     app.get("/api/checklists/",
         checklist.findAll);

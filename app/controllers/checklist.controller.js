@@ -61,6 +61,54 @@ exports.createEntry = (req, res) => {
         });
 };
 
+exports.deleteEntry= (req, res) => {
+    const id = req.params.id;
+
+    Entry.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Entry was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete entry with id=${id}. Maybe list was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete entry with id=" + id
+            });
+        });
+};
+
+exports.deleteList = (req, res) => {
+    const id = req.params.id;
+
+    List.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "List was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete list with id=${id}. Maybe list was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete list with id=" + id
+            });
+        });
+};
+
 exports.findListById = (req, res) => {
 
     const id = req.params.id;
