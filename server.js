@@ -31,9 +31,9 @@ app.get("/", (req, res) => {
 const db = require("./app/models");
 const Role = db.role;
 
+let rebuildDatabase =  {force: false}
 
-
-db.sequelize.sync( /*{force: true}*/).then(() => {
+db.sequelize.sync(rebuildDatabase).then(() => {
   initial();
 });
 
@@ -70,6 +70,13 @@ require("./app/routes/turorial.routes")(app);
 // Setup routs for auth
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+
+/***
+ * Checklists
+ */
+require('./app/routes/checklist.routes')(app);
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

@@ -19,7 +19,14 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// Tutorials ///////////////////////////////////
+
 db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
+
+/***
+ * Authentiication
+ */
+
 db.user      = require("../models/user.model.js")(sequelize, Sequelize);
 db.role      = require("../models/role.model.js")(sequelize, Sequelize);
 
@@ -35,5 +42,17 @@ db.user.belongsToMany(db.role, {
 });
 
 db.ROLES = ["user", "admin", "moderator"];
+
+/***
+ * Checklists
+ */
+
+db.list      = require("../models/checklist/list.model.js")(sequelize, Sequelize);
+db.entry     = require("../models/checklist/entry.model.js")(sequelize, Sequelize);
+
+db.list.hasMany(db.entry, { as: "entries" });
+db.entry.belongsTo(db.list, { as: "list" });
+
+// @todo: What about primary key?
 
 module.exports = db;
