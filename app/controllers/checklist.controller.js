@@ -152,3 +152,36 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.updateEntry = (req, res) => {
+    const id = req.params.id;
+
+    // Validate request   
+    if (!req.body.name
+        || !req.body.listId) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    Entry.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Entry was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update entry with id=${id}. Maybe entry was not found or req.body is empty!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating entry with id=" + id
+            });
+        });
+};

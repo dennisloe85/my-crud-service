@@ -40,4 +40,8 @@ module.exports = function (app) {
     // Retrieve a single entry with id
     app.get("/api/checklists/entry/:id",
         checklist.findEntryById);
+
+    // Update a single entry with id
+    app.put("/api/checklists/entry/:id",
+        checklist.updateEntry);
 };
